@@ -1,6 +1,7 @@
 import uuid
 from django.db import models
 from django.utils.text import slugify
+from django.utils.translation import ugettext_lazy as _
 
 
 class PsvReview(models.Model):
@@ -21,7 +22,7 @@ class PsvReview(models.Model):
         return slugify(f'{self.author.get_full_name_slug} {self.psv.plate_registration_no} review')
 
     def get_absolute_url(self):
-        return reverse("Review_detail", kwargs={"pk": self.pk})
+        return reverse("review:detail", kwargs={"pk": self.pk})
 
 
 def get_image_filename(instance, filename):
@@ -49,4 +50,4 @@ class ReviewImage(models.Model):
         return self.id
 
     def get_absolute_url(self):
-        return reverse("ReviewImage_detail", kwargs={"pk": self.pk})
+        return reverse("review_image:detail", kwargs={"pk": self.pk})

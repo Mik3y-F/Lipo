@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 
 
 class Collection(models.Model):
@@ -31,8 +32,8 @@ class PsvCollection(models.Model):
                                    on_delete=models.CASCADE)
 
     class Meta:
-        verbose_name = _("psvcollection")
-        verbose_name_plural = _("psvcollections")
+        verbose_name = _("PSV User Collection")
+        verbose_name_plural = _("PSV User Collections")
 
     def __str__(self):
         return self.id

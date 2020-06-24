@@ -1,4 +1,10 @@
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
+
+
+def get_image_filename(instance, filename):
+    user_id = instance.user.id
+    return f"driver/{user_id}/psv_license/"
 
 
 class Driver(models.Model):
@@ -7,7 +13,7 @@ class Driver(models.Model):
                                 on_delete=models.CASCADE)
     national_id_number = models.CharField(_("Driver National Id Number"), max_length=50)
     psvDrivingLicensePhoto = models.FileField(_("Photo of Driver's Psv driving license"),
-                                              upload_to=None, max_length=100)
+                                              upload_to=get_image_filename, max_length=100)
     phone = models.PhoneNumberField(_("Driver's Phone Number"))
     attribute = models.ManyToManyField("drivers.Attribute",
                                        verbose_name=_("Attributes that driver has"))
@@ -20,7 +26,7 @@ class Driver(models.Model):
         return self.user.get_full_name
 
     def get_absolute_url(self):
-        return reverse("Driver_detail", kwargs={"pk": self.pk})
+        return reverse("driver:detail", kwargs={"pk": self.pk})
 
 
 class DriverLike(models.Model):
@@ -64,6 +70,8 @@ class DriverFavourite(models.Model):
 
 
 class Attribute(models.Model):
+
+    name = models.CharField(_("Psv Attribute"), max_length=50)
 
     class Meta:
         verbose_name = _("Attribute")

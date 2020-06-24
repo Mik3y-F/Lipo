@@ -1,5 +1,6 @@
 import uuid
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 
 
 class PsvReviewVote(models.Model):
@@ -36,7 +37,7 @@ class VoteType(models.Model):
     name = models.CharField(
         max_length=32,
         choices=VOTE_TYPE,
-    )
+    )psvcollections
 
     class Meta:
         verbose_name = _("VoteType")

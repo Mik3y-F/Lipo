@@ -1,4 +1,6 @@
+import uuid
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 
 
 class Conductor(models.Model):
@@ -18,7 +20,7 @@ class Conductor(models.Model):
         return self.user.get_full_name
 
     def get_absolute_url(self):
-        return reverse("conductor_detail", kwargs={"pk": self.pk})
+        return reverse("conductor:detail", kwargs={"pk": self.pk})
 
 
 class ConductorLike(models.Model):
@@ -63,6 +65,8 @@ class ConductorFavourite(models.Model):
 
 
 class Attribute(models.Model):
+
+    name = models.CharField(_("Psv Attribute"), max_length=50)
 
     class Meta:
         verbose_name = _("Attribute")

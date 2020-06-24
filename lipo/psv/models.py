@@ -1,5 +1,6 @@
 import uuid
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 
 
 class Psv(models.Model):
@@ -45,8 +46,8 @@ class PsvType(models.Model):
    name = models.CharField(_("Name of PSV Type"), blank=True, max_length=255)
 
     class Meta:
-        verbose_name = _("PsvType")
-        verbose_name_plural = _("PsvTypes")
+        verbose_name = _("Psv Type")
+        verbose_name_plural = _("Psv Types")
 
     def __str__(self):
         return self.name
@@ -65,19 +66,19 @@ class PsvLike(models.Model):
 
 
     class Meta:
-        verbose_name = _("PsvLike")
-        verbose_name_plural = _("PsvLikes")
+        verbose_name = _("Psv Like")
+        verbose_name_plural = _("Psv Likes")
 
     def __str__(self):
         return self.id
 
     def get_absolute_url(self):
-        return reverse("PsvLike_detail", kwargs={"pk": self.pk})
+        return reverse("psv_like:detail", kwargs={"pk": self.pk})
 
 
 class PsvFavourite(models.Model):
     
-    id = models.UUIDField(_("PSV Favoiurite Id"), primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.UUIDField(_("PSV Favourite Id"), primary_key=True, default=uuid.uuid4, editable=False)
     user = models.ForeignKey("users.User", verbose_name=_("user who favourited P.S.V"), 
                 on_delete=models.CASCADE)
     psv = models.ForeignKey("psv.Psv", verbose_name=_("P.S.V. favourited by user"),
@@ -85,22 +86,25 @@ class PsvFavourite(models.Model):
 
 
     class Meta:
-        verbose_name = _("PsvLike")
-        verbose_name_plural = _("PsvLikes")
+        verbose_name = _("Psv Like")
+        verbose_name_plural = _("Psv Likes")
 
     def __str__(self):
         return self.id
 
     def get_absolute_url(self):
-        return reverse("PsvLike_detail", kwargs={"pk": self.pk})
+        return reverse("psv_favourite:detail", kwargs={"pk": self.pk})
 
 
 
 class Attribute(models.Model):
 
+    name = models.CharField(_("Psv Attribute"), max_length=50)
+
     class Meta:
         verbose_name = _("Attribute")
         verbose_name_plural = _("Attributes")
+    
 
     def __str__(self):
         return self.name

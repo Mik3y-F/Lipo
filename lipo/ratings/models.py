@@ -1,5 +1,6 @@
 import uuid
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 
 
 class PsvRating(models.Model):
@@ -21,7 +22,7 @@ class PsvRating(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse("Rating_detail", kwargs={"pk": self.pk})
+        return reverse("rating:detail", kwargs={"pk": self.pk})
 
 
 class RatingType(models.Model):
@@ -49,4 +50,4 @@ class RatingType(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse("users_types:detail", kwargs={"pk": self.pk})
+        return reverse("rating_type:detail", kwargs={"pk": self.pk})
