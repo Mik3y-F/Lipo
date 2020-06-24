@@ -40,8 +40,8 @@ class VoteType(models.Model):
     )psvcollections
 
     class Meta:
-        verbose_name = _("VoteType")
-        verbose_name_plural = _("VoteTypes")
+        verbose_name = _("Vote Type")
+        verbose_name_plural = _("Vote Types")
 
     def __str__(self):
         return self.name
